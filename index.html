@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Upma Mishra | Dev Links</title>
 
   <!-- Google Fonts -->
@@ -30,6 +30,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Orbitron', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
     body {
       background: var(--bg-dark);
@@ -39,10 +40,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem;
+      padding: 0;
       min-height: 100vh;
       transition: all 0.5s ease;
       position: relative;
+      overflow-x: hidden;
     }
     body.light-mode {
       background: var(--bg-light);
@@ -76,29 +78,58 @@
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
     .top-bar {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       display: flex;
+      justify-content: flex-end;
       gap: 1rem;
-      z-index: 999;
+      z-index: 1000;
+      padding: 1rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      pointer-events: none;
     }
     .top-bar button {
-      background: transparent;
+      background: rgba(0, 0, 0, 0.5);
       border: none;
       cursor: pointer;
       font-size: 1.5rem;
       color: #fff;
-      transition: color 0.3s;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      pointer-events: auto;
+      backdrop-filter: blur(5px);
+    }
+    .top-bar button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
     }
     .quote {
       font-size: 1.2rem;
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin: 5rem 0 2rem;
+      padding: 0 1rem;
       text-shadow: 0 0 10px #39ff14, 0 0 20px #00ffff, 0 0 30px #ff00ff;
       animation: pulseQuote 3s infinite alternate;
       transition: all 0.5s ease;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
     }
     body.light-mode .quote {
       text-shadow: 0 0 10px #ff6b6b, 0 0 20px #4ecdc4, 0 0 30px #45b7d1;
@@ -108,6 +139,9 @@
       text-align: center;
       margin-bottom: 2rem;
       animation: fadeInUp 1s ease-out;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 1;
     }
     .profile img {
       width: 130px;
@@ -126,12 +160,14 @@
       background: linear-gradient(90deg, #00ffff, #ff00ff, #39ff14);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
     }
     .profile p {
       font-size: 1rem;
       color: #ddd;
       margin-top: 0.4rem;
       transition: all 0.5s ease;
+      line-height: 1.5;
     }
     body.light-mode .profile p {
       color: #2d3436;
@@ -145,6 +181,10 @@
       flex-direction: column;
       gap: 1rem;
       animation: fadeInUp 1.5s ease-out;
+      padding: 0 1rem;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
     .links a {
       background: var(--link-dark);
@@ -171,7 +211,7 @@
       box-shadow: 0 0 25px #00ffff, 0 0 30px #ff00ff, 0 0 35px #39ff14;
     }
     .connect-btn {
-      margin-top: 1.5rem;
+      margin: 1.5rem auto;
       padding: 1rem;
       border: none;
       background: linear-gradient(135deg, #ff00ff, #00ffff);
@@ -181,24 +221,44 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: 0 0 10px #00ffffaa;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      width: calc(100% - 2rem);
+      max-width: 440px;
+      display: block;
+      position: relative;
+      z-index: 1;
     }
     .connect-btn:hover {
       background: linear-gradient(135deg, #39ff14, #ff00ff);
+      transform: scale(1.02);
     }
     .share-menu {
       display: none;
-      position: absolute;
-      top: 3.5rem;
+      position: fixed;
+      top: 4.5rem;
       right: 1rem;
-      background: #111;
+      background: rgba(17, 17, 17, 0.95);
       padding: 0.8rem;
       border-radius: 10px;
       flex-direction: column;
       gap: 0.5rem;
       box-shadow: 0 0 15px #00ffff;
-      z-index: 1000;
-      min-width: 160px;
+      z-index: 1001;
+      min-width: 200px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform-origin: top right;
+      animation: menuSlide 0.3s ease-out;
+    }
+    @keyframes menuSlide {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
     .share-menu button {
       font-size: 1rem;
@@ -207,15 +267,16 @@
       border: none;
       text-align: left;
       cursor: pointer;
-      padding: 0.4rem 0.6rem;
+      padding: 0.8rem 1rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      border-radius: 6px;
-      transition: background 0.3s;
+      gap: 0.8rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      width: 100%;
     }
     .share-menu button:hover {
-      background: #00ffff33;
+      background: rgba(0, 255, 255, 0.1);
     }
     .share-menu button.cut-btn {
       background: #ff4757;
@@ -223,7 +284,7 @@
       font-weight: bold;
       border-radius: 8px;
       margin-top: 8px;
-      padding: 8px 12px;
+      padding: 0.8rem 1rem;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
@@ -232,8 +293,18 @@
     }
     .share-menu button.cut-btn:hover {
       background: #ff6b81;
-      transform: scale(1.05);
+      transform: scale(1.02);
       box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+    }
+    body.light-mode .share-menu {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    body.light-mode .share-menu button {
+      color: #2d3436;
+    }
+    body.light-mode .share-menu button:hover {
+      background: rgba(0, 0, 0, 0.05);
     }
     body.light-mode .share-menu button.cut-btn {
       background: #2ed573;
@@ -247,24 +318,70 @@
     }
     .footer {
       margin-top: auto;
-      padding-top: 2rem;
+      padding: 2rem 1rem;
       font-size: 0.85rem;
       color: #aaa;
       text-align: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
     }
     @media screen and (max-width: 600px) {
-      body {
-        padding: 1rem;
+      .container {
+        padding: 0.5rem;
+      }
+      .top-bar {
+        padding: 0.75rem;
       }
       .quote {
         font-size: 1rem;
+        margin-top: 4rem;
+        padding: 0 0.5rem;
+      }
+      .profile {
+        padding: 0 0.5rem;
       }
       .profile h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+      }
+      .profile p {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+      }
+      .links {
+        padding: 0 0.5rem;
       }
       .links a {
         font-size: 0.95rem;
         padding: 0.9rem;
+      }
+      .share-menu {
+        top: 4rem;
+        right: 0.5rem;
+        min-width: 180px;
+      }
+      .share-menu button {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+      }
+      .connect-btn {
+        margin: 1.5rem 0.5rem;
+        font-size: 0.95rem;
+      }
+    }
+    @media screen and (max-width: 360px) {
+      .profile h1 {
+        font-size: 1.6rem;
+      }
+      .profile p {
+        font-size: 0.85rem;
+      }
+      .links a {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+      }
+      .share-menu {
+        min-width: 160px;
       }
     }
   </style>
@@ -300,49 +417,58 @@
     </button>
   </div>
 
-  <div class="quote">
-    💡 "Dream in code. Build in logic. Deploy with courage." 🚀
-  </div>
+  <div class="container">
+    <div class="quote">
+      💡 "Dream in code. Build in logic. Deploy with courage." 🚀
+    </div>
 
-  <div class="profile">
-    <img src="https://avatars.githubusercontent.com/upma-dev" alt="Upma Mishra" />
-    <h1>Upma Mishra</h1>
-    <p>💻 Tech Explorer | 🚀 MERN Developer | ✍️ Blogger | 🔁 Lifelong Learner</p>
-  </div>
+    <div class="profile">
+      <img src="https://avatars.githubusercontent.com/upma-dev" alt="Upma Mishra" />
+      <h1>Upma Mishra</h1>
+      <p>💻 Tech Explorer | 🚀 MERN Developer | ✍️ Blogger | 🔁 Lifelong Learner</p>
+    </div>
 
-  <div class="links">
-    <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
-      GitHub <span><i class="fab fa-github"></i></span>
-    </a>
-    <a href="https://www.linkedin.com/in/upma-mishra-dev" target="_blank" rel="noopener noreferrer">
-      LinkedIn <span><i class="fab fa-linkedin"></i></span>
-    </a>
-    <a href="https://twitter.com/upmamishra79061" target="_blank" rel="noopener noreferrer">
-      Twitter <span><i class="fab fa-twitter"></i></span>
-    </a>
-    <a href="https://instagram.com/som_ya_12_" target="_blank" rel="noopener noreferrer">
-      Instagram <span><i class="fab fa-instagram"></i></span>
-    </a>
-    <a href="mailto:upma7354@gmail.com" target="_blank" rel="noopener noreferrer">
-      Email Me <span><i class="fas fa-envelope"></i></span>
-    </a>
-    <a href="https://medium.com/@Upma_dev" target="_blank" rel="noopener noreferrer">
-      Medium Blog <span><i class="fab fa-medium"></i></span>
-    </a>
-  </div>
+    <div class="links">
+      <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
+        GitHub <span><i class="fab fa-github"></i></span>
+      </a>
+      <a href="https://www.linkedin.com/in/upma-mishra-dev" target="_blank" rel="noopener noreferrer">
+        LinkedIn <span><i class="fab fa-linkedin"></i></span>
+      </a>
+      <a href="https://twitter.com/upmamishra79061" target="_blank" rel="noopener noreferrer">
+        Twitter <span><i class="fab fa-twitter"></i></span>
+      </a>
+      <a href="https://instagram.com/som_ya_12_" target="_blank" rel="noopener noreferrer">
+        Instagram <span><i class="fab fa-instagram"></i></span>
+      </a>
+      <a href="mailto:upma7354@gmail.com" target="_blank" rel="noopener noreferrer">
+        Email Me <span><i class="fas fa-envelope"></i></span>
+      </a>
+      <a href="https://medium.com/@Upma_dev" target="_blank" rel="noopener noreferrer">
+        Medium Blog <span><i class="fab fa-medium"></i></span>
+      </a>
+    </div>
 
-  <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
-    Connect on Linktree
-  </button>
+    <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
+      Connect on Linktree
+    </button>
 
-  <div class="footer">
-    &copy; 2025 Upma Mishra. All rights reserved.
+    <div class="footer">
+      &copy; 2025 Upma Mishra. All rights reserved.
+    </div>
   </div>
 
   <script>
     const shareMenu = document.getElementById('shareMenu');
     const themeBtn = document.querySelector('.top-bar button:last-child');
     let isDark = true;
+
+    // Close share menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!shareMenu.contains(e.target) && !e.target.closest('.top-bar button:first-child')) {
+        shareMenu.classList.remove('show');
+      }
+    });
 
     function toggleShare() {
       shareMenu.classList.toggle('show');
@@ -364,12 +490,10 @@
     }
 
     function handleCut() {
-      // Add visual feedback
       const cutBtn = document.querySelector('.cut-btn');
       cutBtn.style.transform = 'scale(0.95)';
       cutBtn.style.opacity = '0.8';
       
-      // Reset after animation
       setTimeout(() => {
         cutBtn.style.transform = 'scale(1)';
         cutBtn.style.opacity = '1';
@@ -391,6 +515,11 @@
         document.querySelector('.profile p').style.textShadow = '0 0 10px rgba(78, 205, 196, 0.3)';
       }
     }
+
+    // Prevent zoom on double tap for mobile
+    document.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
