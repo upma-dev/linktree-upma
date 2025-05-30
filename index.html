@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Upma Mishra | Dev Links</title>
 
   <!-- Google Fonts -->
@@ -16,79 +16,78 @@
     referrerpolicy="no-referrer"
   />
 
-  <!-- STYLE TAG (already provided and unchanged) -->
   <style>
-    /* Your entire CSS here — omitted here for brevity since you already have it */
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 500px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .profile h1 {
+      margin-bottom: 10px;
+    }
+
+    .links a,
+    .discord-btn {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      background-color: #1f1f1f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .links a:hover,
+    .discord-btn:hover {
+      background-color: #333;
+    }
+
+    .discord-btn i {
+      margin-left: 10px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <div class="top-bar">
-    <button onclick="toggleShare()" title="Share">
-      <i class="fas fa-share-alt"></i>
-    </button>
-    <button onclick="toggleTheme()" title="Toggle Theme">
-      <i class="fas fa-sun"></i>
-    </button>
-  </div>
-
-  <div class="share-menu" id="shareMenu">
-    <button onclick="shareTo('https://wa.me/?text=Check%20out%20Upma%27s%20Linktree!')">
-      <i class="fab fa-whatsapp"></i> WhatsApp
-    </button>
-    <button onclick="shareTo('https://www.linkedin.com/sharing/share-offsite/?url=https://linktr.ee/upma-dev')">
-      <i class="fab fa-linkedin"></i> LinkedIn
-    </button>
-    <button onclick="shareTo('https://x.com/intent/tweet?text=Check%20out%20Upma%27s%20Linktree%20https://linktr.ee/upma-dev')">
-      <i class="fab fa-twitter"></i> Twitter
-    </button>
-    <button onclick="shareTo('mailto:?subject=Check%20this%20Linktree&body=https://linktr.ee/upma-dev')">
-      <i class="fas fa-envelope"></i> Email
-    </button>
-    <button onclick="copyCurrentUrl()">
-      <i class="fas fa-copy"></i> Copy URL
-    </button>
-    <button class="cut-btn" onclick="handleCut()">
-      <i class="fas fa-cut"></i> Cut
-    </button>
-  </div>
-
   <div class="container">
-    <div class="quote">
-      💡 "Dream in code. Build in logic. Deploy with courage." 🚀
-    </div>
-
     <div class="profile">
       <h1>Upma Mishra</h1>
-      <p>💻 Tech Explorer | 🚀 Full Stack Developer | ✍️ Blogger | 🔁 Lifelong Learner</p>
+      <p>💻 Full Stack Dev | 🚀 Tech Enthusiast</p>
     </div>
 
     <div class="links">
-      <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
-        GitHub <span><i class="fab fa-github"></i></span>
-      </a>
-      <a href="https://www.linkedin.com/in/upma-mishra-dev" target="_blank" rel="noopener noreferrer">
-        LinkedIn <span><i class="fab fa-linkedin"></i></span>
-      </a>
-      <a href="https://twitter.com/upmamishra79061" target="_blank" rel="noopener noreferrer">
-        Twitter <span><i class="fab fa-twitter"></i></span>
-      </a>
-      <a href="https://instagram.com/som_ya_12_" target="_blank" rel="noopener noreferrer">
-        Instagram <span><i class="fab fa-instagram"></i></span>
-      </a>
-      <a href="mailto:upma7354@gmail.com" target="_blank" rel="noopener noreferrer">
-        Email Me <span><i class="fas fa-envelope"></i></span>
-      </a>
-      <a href="https://medium.com/@Upma_dev" target="_blank" rel="noopener noreferrer">
-        Medium Blog <span><i class="fab fa-medium"></i></span>
-      </a>
-      <!-- Discord ID added below -->
-      <a href="#" onclick="navigator.clipboard.writeText('upma_1234'); alert('Discord ID copied: upma_1234'); return false;">
-        Discord: upma_1234 <span><i class="fab fa-discord"></i></span>
-      </a>
+      <a href="https://github.com/upma-dev" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://linkedin.com/in/upma-mishra-dev" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://twitter.com/upmamishra79061" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="https://instagram.com/som_ya_12_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="mailto:upma7354@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://medium.com/@Upma_dev" target="_blank"><i class="fab fa-medium"></i> Medium</a>
     </div>
 
-    <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
-      Connect on Linktree
+    <!-- Discord Copy Button -->
+    <button class="discord-btn" onclick="copyDiscordID()">
+      Copy Discord ID: upma_1234 <i class="fab fa-discord"></i>
     </button>
 
     <div class="footer">
@@ -97,43 +96,14 @@
   </div>
 
   <script>
-    const shareMenu = document.getElementById('shareMenu');
-    const themeBtn = document.querySelector('.top-bar button:last-child');
-    let isDark = true;
-
-    document.addEventListener('click', (e) => {
-      if (!shareMenu.contains(e.target) && !e.target.closest('.top-bar button:first-child')) {
-        shareMenu.classList.remove('show');
-      }
-    });
-
-    function toggleShare() {
-      shareMenu.classList.toggle('show');
-    }
-
-    function shareTo(url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-      shareMenu.classList.remove('show');
-    }
-
-    function copyCurrentUrl() {
-      const currentUrl = window.location.href;
-      navigator.clipboard.writeText(currentUrl).then(() => {
-        alert('URL copied to clipboard!');
-        shareMenu.classList.remove('show');
-      });
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      isDark = !isDark;
-      themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    }
-
-    function handleCut() {
-      alert('Cut feature not implemented. Add functionality here.');
+    function copyDiscordID() {
+      const discordID = 'upma_1234';
+      navigator.clipboard.writeText(discordID)
+        .then(() => alert('Discord ID copied: ' + discordID))
+        .catch(err => alert('Failed to copy Discord ID'));
     }
   </script>
 </body>
 </html>
+
 
