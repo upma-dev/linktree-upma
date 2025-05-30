@@ -16,9 +16,362 @@
     referrerpolicy="no-referrer"
   />
 
-  <!-- STYLE TAG (already provided and unchanged) -->
   <style>
-    /* Your entire CSS here — omitted here for brevity since you already have it */
+    :root {
+      --bg-dark: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a1a2e);
+      --bg-light: linear-gradient(135deg, #e0f7fa, #ffe0f7);
+      --text-dark: #fff;
+      --text-light: #111;
+      --link-dark: rgba(255, 255, 255, 0.05);
+      --link-light: rgba(0, 0, 0, 0.05);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: var(--bg-dark);
+      background-size: 400% 400%;
+      animation: gradientFlow 12s ease infinite;
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      min-height: 100vh;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body.light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+    body.light-mode .links a {
+      background: var(--link-light);
+      color: #111;
+    }
+    body.light-mode .links a:hover {
+      color: #fff;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #39ff14);
+    }
+    body.light-mode .top-bar button {
+      color: #111;
+    }
+    @keyframes gradientFlow {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    @keyframes pulseQuote {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.03); }
+    }
+    @keyframes pulseQuoteLight {
+      0% { opacity: 0.9; transform: scale(1); text-shadow: 0 0 10px #ff6b6b, 0 0 20px #4ecdc4; }
+      100% { opacity: 1; transform: scale(1.03); text-shadow: 0 0 15px #ff6b6b, 0 0 25px #4ecdc4, 0 0 35px #45b7d1; }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      z-index: 1000;
+      padding: 1rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+      pointer-events: none;
+    }
+    .top-bar button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #fff;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      pointer-events: auto;
+      backdrop-filter: blur(5px);
+    }
+    .top-bar button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+    .quote {
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 5rem 0 2rem;
+      padding: 0 1rem;
+      text-shadow: 0 0 10px #39ff14, 0 0 20px #00ffff, 0 0 30px #ff00ff;
+      animation: pulseQuote 3s infinite alternate;
+      transition: all 0.5s ease;
+      max-width: 600px;
+      position: relative;
+      z-index: 1;
+    }
+    body.light-mode .quote {
+      text-shadow: 0 0 10px #ff6b6b, 0 0 20px #4ecdc4, 0 0 30px #45b7d1;
+      color: #2d3436;
+    }
+    .profile {
+      text-align: center;
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .profile h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #39ff14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .profile p {
+      font-size: 1rem;
+      color: #ddd;
+      margin-top: 0.4rem;
+      transition: all 0.5s ease;
+      line-height: 1.5;
+    }
+    body.light-mode .profile p {
+      color: #2d3436;
+      text-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+      font-weight: 500;
+    }
+    .links {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeInUp 1.5s ease-out;
+      padding: 0 1rem;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .links a {
+      background: var(--link-dark);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 15px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid transparent;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 12px #00ffff55;
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .links a:hover {
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #39ff14);
+      color: #000;
+      transform: scale(1.07);
+      border: 2px solid #fff;
+      box-shadow: 0 0 25px #00ffff, 0 0 30px #ff00ff, 0 0 35px #39ff14;
+    }
+    .connect-btn {
+      margin: 1.5rem auto;
+      padding: 1rem;
+      border: none;
+      background: linear-gradient(135deg, #ff00ff, #00ffff);
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffffaa;
+      transition: all 0.3s ease;
+      width: calc(100% - 2rem);
+      max-width: 440px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .connect-btn:hover {
+      background: linear-gradient(135deg, #39ff14, #ff00ff);
+      transform: scale(1.02);
+    }
+    .share-menu {
+      display: none;
+      position: fixed;
+      top: 4.5rem;
+      right: 1rem;
+      background: rgba(17, 17, 17, 0.95);
+      padding: 0.8rem;
+      border-radius: 10px;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: 0 0 15px #00ffff;
+      z-index: 1001;
+      min-width: 200px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transform-origin: top right;
+      animation: menuSlide 0.3s ease-out;
+    }
+    @keyframes menuSlide {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .share-menu button {
+      font-size: 1rem;
+      color: #fff;
+      background: transparent;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    .share-menu button:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+    .share-menu button.cut-btn {
+      background: #ff4757;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      margin-top: 8px;
+      padding: 0.8rem 1rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .share-menu button.cut-btn:hover {
+      background: #ff6b81;
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(255, 71, 87, 0.5);
+    }
+    body.light-mode .share-menu {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    body.light-mode .share-menu button {
+      color: #2d3436;
+    }
+    body.light-mode .share-menu button:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    body.light-mode .share-menu button.cut-btn {
+      background: #2ed573;
+    }
+    body.light-mode .share-menu button.cut-btn:hover {
+      background: #7bed9f;
+      box-shadow: 0 0 15px rgba(46, 213, 115, 0.5);
+    }
+    .share-menu.show {
+      display: flex;
+    }
+    .footer {
+      margin-top: auto;
+      padding: 2rem 1rem;
+      font-size: 0.85rem;
+      color: #aaa;
+      text-align: center;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 0.5rem;
+      }
+      .top-bar {
+        padding: 0.75rem;
+      }
+      .quote {
+        font-size: 1rem;
+        margin-top: 4rem;
+        padding: 0 0.5rem;
+      }
+      .profile {
+        padding: 0 0.5rem;
+      }
+      .profile h1 {
+        font-size: 1.8rem;
+      }
+      .profile p {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+      }
+      .links {
+        padding: 0 0.5rem;
+      }
+      .links a {
+        font-size: 0.95rem;
+        padding: 0.9rem;
+      }
+      .share-menu {
+        top: 4rem;
+        right: 0.5rem;
+        min-width: 180px;
+      }
+      .share-menu button {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+      }
+      .connect-btn {
+        margin: 1.5rem 0.5rem;
+        font-size: 0.95rem;
+      }
+    }
+    @media screen and (max-width: 360px) {
+      .profile h1 {
+        font-size: 1.6rem;
+      }
+      .profile p {
+        font-size: 0.85rem;
+      }
+      .links a {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+      }
+      .share-menu {
+        min-width: 160px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -62,9 +415,7 @@
       <p>💻 Tech Explorer | 🚀 Full Stack Developer | ✍️ Blogger | 🔁 Lifelong Learner</p>
     </div>
 
-  <!-- ... (your head and all previous content remain the same) ... -->
-
-<div class="links">
+  <div class="links">
   <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
     GitHub <span><i class="fab fa-github"></i></span>
   </a>
@@ -87,7 +438,7 @@
     Discord <span><i class="fab fa-discord"></i></span>
   </a>
 </div>
-  <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
+    <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
       Connect on Linktree
     </button>
 
