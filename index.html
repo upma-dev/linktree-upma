@@ -62,32 +62,32 @@
       <p>💻 Tech Explorer | 🚀 Full Stack Developer | ✍️ Blogger | 🔁 Lifelong Learner</p>
     </div>
 
-    <div class="links">
-      <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
-        GitHub <span><i class="fab fa-github"></i></span>
-      </a>
-      <a href="https://www.linkedin.com/in/upma-mishra-dev" target="_blank" rel="noopener noreferrer">
-        LinkedIn <span><i class="fab fa-linkedin"></i></span>
-      </a>
-      <a href="https://twitter.com/upmamishra79061" target="_blank" rel="noopener noreferrer">
-        Twitter <span><i class="fab fa-twitter"></i></span>
-      </a>
-      <a href="https://instagram.com/som_ya_12_" target="_blank" rel="noopener noreferrer">
-        Instagram <span><i class="fab fa-instagram"></i></span>
-      </a>
-      <a href="mailto:upma7354@gmail.com" target="_blank" rel="noopener noreferrer">
-        Email Me <span><i class="fas fa-envelope"></i></span>
-      </a>
-      <a href="https://medium.com/@Upma_dev" target="_blank" rel="noopener noreferrer">
-        Medium Blog <span><i class="fab fa-medium"></i></span>
-      </a>
-      <!-- Discord ID added below -->
-      <a href="#" onclick="navigator.clipboard.writeText('upma_1234'); alert('Discord ID copied: upma_1234'); return false;">
-        Discord: upma_1234 <span><i class="fab fa-discord"></i></span>
-      </a>
-    </div>
+  <!-- ... (your head and all previous content remain the same) ... -->
 
-    <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
+<div class="links">
+  <a href="https://github.com/upma-dev" target="_blank" rel="noopener noreferrer">
+    GitHub <span><i class="fab fa-github"></i></span>
+  </a>
+  <a href="https://www.linkedin.com/in/upma-mishra-dev" target="_blank" rel="noopener noreferrer">
+    LinkedIn <span><i class="fab fa-linkedin"></i></span>
+  </a>
+  <a href="https://twitter.com/upmamishra79061" target="_blank" rel="noopener noreferrer">
+    Twitter <span><i class="fab fa-twitter"></i></span>
+  </a>
+  <a href="https://instagram.com/som_ya_12_" target="_blank" rel="noopener noreferrer">
+    Instagram <span><i class="fab fa-instagram"></i></span>
+  </a>
+  <a href="mailto:upma7354@gmail.com" target="_blank" rel="noopener noreferrer">
+    Email Me <span><i class="fas fa-envelope"></i></span>
+  </a>
+  <a href="https://medium.com/@Upma_dev" target="_blank" rel="noopener noreferrer">
+    Medium Blog <span><i class="fab fa-medium"></i></span>
+  </a>
+  <a href="https://discord.com/users/upma_1234" target="_blank" rel="noopener noreferrer">
+    Discord <span><i class="fab fa-discord"></i></span>
+  </a>
+</div>
+  <button class="connect-btn" onclick="window.open('https://linktr.ee/upma-dev', '_blank')">
       Connect on Linktree
     </button>
 
@@ -101,6 +101,7 @@
     const themeBtn = document.querySelector('.top-bar button:last-child');
     let isDark = true;
 
+    // Close share menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!shareMenu.contains(e.target) && !e.target.closest('.top-bar button:first-child')) {
         shareMenu.classList.remove('show');
@@ -121,20 +122,42 @@
       navigator.clipboard.writeText(currentUrl).then(() => {
         alert('URL copied to clipboard!');
         shareMenu.classList.remove('show');
+      }).catch(() => {
+        alert('Failed to copy URL. Please copy manually: ' + currentUrl);
       });
     }
 
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      isDark = !isDark;
-      themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    function handleCut() {
+      const cutBtn = document.querySelector('.cut-btn');
+      cutBtn.style.transform = 'scale(0.95)';
+      cutBtn.style.opacity = '0.8';
+      
+      setTimeout(() => {
+        cutBtn.style.transform = 'scale(1)';
+        cutBtn.style.opacity = '1';
+        shareMenu.classList.remove('show');
+      }, 200);
     }
 
-    function handleCut() {
-      alert('Cut feature not implemented. Add functionality here.');
+    function toggleTheme() {
+      isDark = !isDark;
+      if (isDark) {
+        document.body.classList.remove('light-mode');
+        themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        document.querySelector('.quote').style.animation = 'pulseQuote 3s infinite alternate';
+        document.querySelector('.profile p').style.textShadow = 'none';
+      } else {
+        document.body.classList.add('light-mode');
+        themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        document.querySelector('.quote').style.animation = 'pulseQuoteLight 3s infinite alternate';
+        document.querySelector('.profile p').style.textShadow = '0 0 10px rgba(78, 205, 196, 0.3)';
+      }
     }
+
+    // Prevent zoom on double tap for mobile
+    document.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
-
-
